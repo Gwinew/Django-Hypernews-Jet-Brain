@@ -1,0 +1,35 @@
+{% extends 'news/base.html' %}
+
+{% block content %}
+
+<h2>Hyper news</h2>
+
+<form action="/news/" method="get">
+    {% csrf_token %}
+    <label>Title: <input name="q"></label><br>
+    <button type="submit">Search</button>
+</form>
+
+{% if query %}
+{% for date, item in news.items %}
+      <h4>{{ date }}</h4>
+    <ul>
+    {% for entry in item %}
+    <li><a href="{% url 'detail' entry.link %}">{{ entry.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% endfor %}
+{% else %}
+{% for date, item in news.items %}
+<h4>{{ date }}</h4>
+<ul>
+    {% for entry in item %}
+    <li><a href="{% url 'detail' entry.link %}">{{ entry.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endfor %}
+{% endif %}
+
+<a href="/news/create/">Create</a>
+
+{% endblock content %}

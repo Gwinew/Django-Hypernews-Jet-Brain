@@ -1,0 +1,12 @@
+{% extends 'news/base.html' %}
+
+{% block content %}
+
+{% if news %}
+    <h2>{{ news.title }}</h2>
+    <p>{{ news.created }}</p>
+    <p>{{ news.text }}</p>
+{% endif %}
+<a href="/news/">News</a>
+
+{% endblock content %}
